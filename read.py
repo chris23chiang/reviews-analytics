@@ -24,13 +24,52 @@ print('一共有', len(new), '筆留言長度小於100')
 print(new[0])
 print(new[1])
 
-#good = []
-#for d in data:
-#	if 'good' in d:
-#		good.append(d)
+good = []
+for d in data:
+	if 'good' in d:
+		good.append(d)
 
 good = [d for d in data if 'good' in d] #list comprehension
 print('一共有', len(good), '筆留言內有提到good')
-print(good[0])
-print(good[1])
+
+#文字計數
+wc = {} #word_count
+for d in data:
+	words = d.split()
+	for word in words:
+		if word in wc.keys():
+			wc[word] += 1
+		else:
+			wc[word] = 1 #新增key
+
+for word in wc:
+	if wc[word] > 1000000:
+		print(word, wc[word])
+
+print(f'一共有{len(wc)}個關鍵字')
+
+while True:
+	word = input('請問你想查什麼字: ')
+	if word == 'q':
+		break
+	if word in wc:
+		print(f'這個字出現的次數為: {wc[word]}次!')
+	else:
+		print(f'您欲查詢的關鍵字未出現在這{len(data)}筆留言中!')
+
+print('感謝使用!Bye!')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
